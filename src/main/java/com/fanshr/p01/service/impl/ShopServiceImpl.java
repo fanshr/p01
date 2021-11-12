@@ -33,7 +33,8 @@ public class ShopServiceImpl implements ShopService {
      * 1. 团队内部达成一致，明确标注事务方法的编程风格
      * 2. 保证事务方法的执行时间尽可能短，不要穿插其他网路操作，RPC/HTTP请求应该考虑玻璃到事务方法之外
      * 3. 不是所有的方法都需要事务，比如只读操作，或者只有一条操作需要修改时
-     * @param shop 店铺基本信息
+     *
+     * @param shop    店铺基本信息
      * @param shopImg 店铺logo
      * @return
      */
@@ -49,7 +50,7 @@ public class ShopServiceImpl implements ShopService {
             shop.setEnableStatus(0);
             shop.setCreateTime(new Date());
             shop.setLastEditTime(new Date());
-            if (shop.getShopCategory() != null){
+            if (shop.getShopCategory() != null) {
                 // TODO: 获取上级分类标识
                 Long shopCategoryId = shop.getShopCategory().getShopCategoryId();
 
@@ -57,29 +58,29 @@ public class ShopServiceImpl implements ShopService {
             }
 
             int effectedRows = shopDao.insertShop(shop);
-            if (effectedRows <=0){
-                throw  new RuntimeException("店铺创建失败");
-            }else{
+            if (effectedRows <= 0) {
+                throw new RuntimeException("店铺创建失败");
+            } else {
                 try {
                     if (shopImg != null) {
-                        addShopImg(shop,shopImg);
+                        addShopImg(shop, shopImg);
                         effectedRows = shopDao.updateShop(shop);
 
-                        if (effectedRows <=0 ){
+                        if (effectedRows <= 0) {
                             throw new RuntimeException("追加图片地址失败");
-                        }else {
-                            return new ShopExecution(ShopStateEnum.CHECK, shop);
                         }
                     }
                 } catch (RuntimeException e) {
-                    throw new RuntimeException("addShopImg error:"+e.getMessage());
+                    throw new RuntimeException("addShopImg error:" + e.getMessage());
                 }
             }
 
         } catch (Exception e) {
-            throw new RuntimeException("insertShop error:"+e.getMessage());
+            throw new RuntimeException("insertShop error:" + e.getMessage());
         }
-        return null;
+
+        return new ShopExecution(ShopStateEnum.CHECK, shop);
+
     }
 
     private void addShopImg(Shop shop, CommonsMultipartFile shopImg) {

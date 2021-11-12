@@ -45,6 +45,7 @@ public class PathUtil {
         StringBuilder shopImgPathBuilder = new StringBuilder();
         shopImgPathBuilder.append("/upload/images/item/shop/");
         shopImgPathBuilder.append(shopId);
+        shopImgPathBuilder.append("/");
         String shopImgPath = shopImgPathBuilder.toString().replace("/", separator);
         return shopImgPath;
     }
