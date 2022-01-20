@@ -1,9 +1,9 @@
-package com.imooc.myo2o.dto;
+package com.fanshr.p01.dto;
+
+import com.fanshr.p01.entity.PersonInfo;
+import com.fanshr.p01.enums.PersonInfoStateEnum;
 
 import java.util.List;
-
-import com.imooc.myo2o.entity.PersonInfo;
-import com.imooc.myo2o.enums.PersonInfoStateEnum;
 
 /**
  * 封装执行后结果

@@ -1,4 +1,4 @@
-package com.imooc.myo2o.enums;
+package com.fanshr.p01.enums;
 
 public enum UserAwardMapStateEnum {
 	SUCCESS(1, "操作成功"), INNER_ERROR(-1001, "操作失败"), NULL_USERAWARD_ID(-1002,

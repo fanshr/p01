@@ -3,14 +3,14 @@ $(function() {
 	var maxItems = 20;
 	var pageSize = 10;
 
-	var listUrl = '/myo2o/frontend/listproductsbyshop';
+	var listUrl = '/p01/frontend/listProductsByShop';
 
 	var pageNum = 1;
 	var shopId = getQueryString('shopId');
 	var productCategoryId = '';
 	var productName = '';
 
-	var searchDivUrl = '/myo2o/frontend/listshopdetailpageinfo?shopId='
+	var searchDivUrl = '/p01/frontend/listShopDetailPageInfo?shopId='
 			+ shopId;
 
 	function getSearchDivData() {
@@ -18,9 +18,9 @@ $(function() {
 		$
 				.getJSON(
 						url,
-						function(data) {
-							if (data.success) {
-								var shop = data.shop;
+						function(response) {
+							if (response.success) {
+								var shop = response.data.shop;
 								$('#shop-cover-pic').attr('src', shop.shopImg);
 								$('#shop-update-time').html(
 										new Date(shop.lastEditTime)
@@ -30,7 +30,7 @@ $(function() {
 								$('#shop-addr').html(shop.shopAddr);
 								$('#shop-phone').html(shop.phone);
 
-								var productCategoryList = data.productCategoryList;
+								var productCategoryList = response.data.productCategoryList;
 								var html = '';
 								productCategoryList
 										.map(function(item, index) {
@@ -52,11 +52,11 @@ $(function() {
 				+ pageSize + '&productCategoryId=' + productCategoryId
 				+ '&productName=' + productName + '&shopId=' + shopId;
 		loading = true;
-		$.getJSON(url, function(data) {
-			if (data.success) {
-				maxItems = data.count;
+		$.getJSON(url, function(response) {
+			if (response.success) {
+				maxItems = response.data.count;
 				var html = '';
-				data.productList.map(function(item, index) {
+				response.data.productList.map(function(item, index) {
 					html += '' + '<div class="card" data-product-id='
 							+ item.productId + '>'
 							+ '<div class="card-header">' + item.productName
@@ -76,11 +76,19 @@ $(function() {
 				});
 				$('.list-div').append(html);
 				var total = $('.list-div .card').length;
+
+				// 更改滚动条的属性，而非取消，会导致加载完全后执行搜索时无法继续加载的问题
+				// if (total >= maxItems) {
+				// 	// 加载完毕，则注销无限加载事件，以防不必要的加载
+				// 	$.detachInfiniteScroll($('.infinite-scroll'));
+				// 	// 删除加载提示符
+				// 	$('.infinite-scroll-preloader').remove();
+				// }
+
 				if (total >= maxItems) {
-					// 加载完毕，则注销无限加载事件，以防不必要的加载
-					$.detachInfiniteScroll($('.infinite-scroll'));
-					// 删除加载提示符
-					$('.infinite-scroll-preloader').remove();
+					$('.infinite-scroll-preloader').hide();
+				}else{
+					$('.infinite-scroll-preloader').show();
 				}
 				pageNum += 1;
 				loading = false;
@@ -122,11 +130,12 @@ $(function() {
 					'.card',
 					function(e) {
 						var productId = e.currentTarget.dataset.productId;
-						window.location.href = '/myo2o/frontend/productdetail?productId='
+						window.location.href = '/p01/frontend/productDetail?productId='
 								+ productId;
 					});
 
-	$('#search').on('input', function(e) {
+	// input 事件调整为change事件，否则，部分浏览器中会出现重复数据
+	$('#search').on('change', function(e) {
 		productName = e.target.value;
 		$('.list-div').empty();
 		pageNum = 1;

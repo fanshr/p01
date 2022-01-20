@@ -1,4 +1,4 @@
-package com.imooc.myo2o.enums;
+package com.fanshr.p01.enums;
 
 public enum HeadLineStateEnum {
 	SUCCESS(0, "创建成功"), INNER_ERROR(-1001, "操作失败"), EMPTY(-1002, "头条信息为空");

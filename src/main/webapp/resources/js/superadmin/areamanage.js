@@ -4,8 +4,8 @@ $(function() {
 });
 function listAreaManagementInfo() {
 	$.ajax({
-		url : "listareas",
-		type : "post",
+		url : "listAreas",
+		type : "get",
 		dataType : 'json',
 		success : function(data) {
 			$('#areaManagementTable').datagrid('loadData', data);

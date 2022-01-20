@@ -11,7 +11,7 @@ import java.util.Random;
  * @date : Created at 2021/11/11 17:10
  * @date : Modified at 2021/11/11 17:10
  */
-public class PathUtil {
+public class FileUtil {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
     private static String separator = System.getProperty("file.separator");
@@ -71,5 +71,17 @@ public class PathUtil {
         String shopCategoryImgagePath = "/upload/images/item/shopCategory/";
         shopCategoryImgagePath = shopCategoryImgagePath.replace("/", separator);
         return shopCategoryImgagePath;
+    }
+
+    public static String getHeadLineImagePath() {
+        String headLineImagePath = "/upload/images/item/headtitle/";
+        headLineImagePath = headLineImagePath.replace("/",separator);
+        return headLineImagePath;
+    }
+
+    public static String getPersonInfoImagePath() {
+        String personInfoImagePath = "/upload/images/item/personinfo/";
+        personInfoImagePath = personInfoImagePath.replace("/", separator);
+        return personInfoImagePath;
     }
 }

@@ -79,7 +79,7 @@
     <!--        <mvc:exclude-mapping path="/shop/ownerlogincheck" />-->
     <!--        <mvc:exclude-mapping path="/shop/logout" />-->
     <!--        <mvc:exclude-mapping path="/shop/register" />-->
-    <!--        <bean id="ShopInterceptor" class="com.imooc.myo2o.interceptor.shop.ShopLoginInterceptor" />-->
+    <!--        <bean id="ShopInterceptor" class="com.fanshr.p01.interceptor.shop.ShopLoginInterceptor" />-->
     <!--    </mvc:interceptor>-->
     <!--    <mvc:interceptor>-->
     <!--        <mvc:mapping path="/shop/**" />-->
@@ -104,7 +104,7 @@
     <!--        <mvc:exclude-mapping path="/shop/getshopinitinfo" />-->
     <!--        <mvc:exclude-mapping path="/shop/registershop" />-->
     <!--        <bean id="ShopPermissionInterceptor"-->
-    <!--              class="com.imooc.myo2o.interceptor.shop.ShopPermissionInterceptor" />-->
+    <!--              class="com.fanshr.p01.interceptor.shop.ShopPermissionInterceptor" />-->
     <!--    </mvc:interceptor>-->
     <!--    <mvc:interceptor>-->
     <!--        <mvc:mapping path="/superadmin/**" />-->
@@ -113,7 +113,7 @@
     <!--        <mvc:exclude-mapping path="/superadmin/main" />-->
     <!--        <mvc:exclude-mapping path="/superadmin/top" />-->
     <!--        <bean id="SuperAdminInterceptor"-->
-    <!--              class="com.imooc.myo2o.interceptor.superadmin.SuperAdminLoginInterceptor" />-->
+    <!--              class="com.fanshr.p01.interceptor.superadmin.SuperAdminLoginInterceptor" />-->
     <!--    </mvc:interceptor>-->
 
     <!--</mvc:interceptors>-->

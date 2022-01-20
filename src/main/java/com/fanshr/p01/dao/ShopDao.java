@@ -1,6 +1,9 @@
 package com.fanshr.p01.dao;
 
 import com.fanshr.p01.entity.Shop;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author : LiuYJ
@@ -10,6 +13,15 @@ import com.fanshr.p01.entity.Shop;
  */
 public interface ShopDao {
 
+    List<Shop> queryShopList(@Param("shopCondition") Shop shopCondition,
+                             @Param("rowIndex") int rowIndex,@Param("pageSize") int pageSize);
+
+    int queryShopCount(@Param("shopCondition") Shop shopCondition);
+    List<Shop> queryByEmployeeId(long employeeId);
+
+    Shop queryByShopId(long shopId);
+
+
     /**
      * 新增店铺信息
      * @param shop 店铺对象
@@ -18,6 +30,8 @@ public interface ShopDao {
     int insertShop(Shop shop);
 
     int updateShop(Shop shop);
+
+    int deleteShopByName(String shopName);
 
 
 }

@@ -1,4 +1,4 @@
-package com.imooc.myo2o.enums;
+package com.fanshr.p01.enums;
 
 public enum ProductStateEnum {
 	OFFLINE(-1, "非法商品"), SUCCESS(0, "操作成功"), PASS(2, "通过认证"), INNER_ERROR(

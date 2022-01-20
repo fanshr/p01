@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @author : LiuYJ
  * @version : v1.0
@@ -18,6 +20,6 @@ public class WechatAuth {
     private Long wechatAuthId;
     private Long userId;
     private String openId;
-    private String createTime;
+    private Date createTime;
     private PersonInfo personInfo;
 }

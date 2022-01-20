@@ -6,7 +6,7 @@ package com.fanshr.p01.entity;
  * @date : Created at 2021/11/16 11:40
  * @date : Modified at 2021/11/16 11:40
  */
-public class ConstantForSuperAdmin {
+public class GeneralConstant {
     public static final String PAGE_SIZE = "rows";
     public static final String PAGE_NO = "page";
     public static final String TOTAL = "total";

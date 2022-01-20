@@ -1,9 +1,9 @@
-package com.imooc.myo2o.dto;
+package com.fanshr.p01.dto;
+
+import com.fanshr.p01.entity.LocalAuth;
+import com.fanshr.p01.enums.LocalAuthStateEnum;
 
 import java.util.List;
-
-import com.imooc.myo2o.entity.LocalAuth;
-import com.imooc.myo2o.enums.LocalAuthStateEnum;
 
 public class LocalAuthExecution {
 	// 结果状态

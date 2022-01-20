@@ -1,9 +1,9 @@
-package com.imooc.myo2o.dto;
+package com.fanshr.p01.dto;
+
+import com.fanshr.p01.entity.HeadLine;
+import com.fanshr.p01.enums.HeadLineStateEnum;
 
 import java.util.List;
-
-import com.imooc.myo2o.entity.HeadLine;
-import com.imooc.myo2o.enums.HeadLineStateEnum;
 
 public class HeadLineExecution {
 	// 结果状态

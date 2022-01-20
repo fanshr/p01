@@ -1,9 +1,9 @@
-package com.imooc.myo2o.dto;
+package com.fanshr.p01.dto;
+
+import com.fanshr.p01.entity.Product;
+import com.fanshr.p01.enums.ProductStateEnum;
 
 import java.util.List;
-
-import com.imooc.myo2o.entity.Product;
-import com.imooc.myo2o.enums.ProductStateEnum;
 
 public class ProductExecution {
 	// 结果状态

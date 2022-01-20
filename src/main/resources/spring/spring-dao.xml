@@ -11,7 +11,7 @@
 
     <!-- 配置整合mybatis过程 -->
     <!-- 1.配置数据库相关参数properties的属性：${url} -->
-    <!--<bean class="com.imooc.myo2o.util.EncryptPropertyPlaceholderConfigurer">-->
+    <!--<bean class="com.fanshr.p01.util.EncryptPropertyPlaceholderConfigurer">-->
     <!--    <property name="locations">-->
     <!--        <list>-->
     <!--            <value>classpath:jdbc.properties</value>-->

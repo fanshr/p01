@@ -11,6 +11,14 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  * @date : Modified at 2021/11/11 17:08
  */
 public interface ShopService {
+     ShopExecution getShopList(Shop shopCondition, int rowIndex, int pageSize);
+
+     ShopExecution getByEmployeeId(long employeedId);
+
+     Shop getByShopId(long shopId);
+
 
      ShopExecution addShop(Shop shop, CommonsMultipartFile shopImg);
+
+     ShopExecution modifyShop(Shop shop, CommonsMultipartFile shopImg);
 }

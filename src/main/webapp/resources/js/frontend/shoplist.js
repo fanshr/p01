@@ -2,8 +2,8 @@ $(function() {
 	var loading = false;
 	var maxItems = 999;
 	var pageSize = 10;
-	var listUrl = '/myo2o/frontend/listshops';
-	var searchDivUrl = '/myo2o/frontend/listshopspageinfo';
+	var listUrl = '/p01/frontend/listShops';
+	var searchDivUrl = '/p01/frontend/listShopsPageInfo';
 	var pageNum = 1;
 	var parentId = getQueryString('parentId');
 	var areaId = '';
@@ -15,9 +15,9 @@ $(function() {
 		$
 				.getJSON(
 						url,
-						function(data) {
-							if (data.success) {
-								var shopCategoryList = data.shopCategoryList;
+						function(response) {
+							if (response.success) {
+								var shopCategoryList = response.data.shopCategoryList;
 								var html = '';
 								html += '<a href="#" class="button" data-category-id=""> 全部类别  </a>';
 								shopCategoryList
@@ -30,7 +30,7 @@ $(function() {
 										});
 								$('#shoplist-search-div').html(html);
 								var selectOptions = '<option value="">全部街道</option>';
-								var areaList = data.areaList;
+								var areaList = response.data.areaList;
 								areaList.map(function(item, index) {
 									selectOptions += '<option value="'
 											+ item.areaId + '">'
@@ -48,11 +48,11 @@ $(function() {
 				+ pageSize + '&parentId=' + parentId + '&areaId=' + areaId
 				+ '&shopCategoryId=' + shopCategoryId + '&shopName=' + shopName;
 		loading = true;
-		$.getJSON(url, function(data) {
-			if (data.success) {
-				maxItems = data.count;
+		$.getJSON(url, function(response) {
+			if (response.success) {
+				maxItems = response.data.count;
 				var html = '';
-				data.shopList.map(function(item, index) {
+				response.data.shopList.map(function(item, index) {
 					html += '' + '<div class="card" data-shop-id="'
 							+ item.shopId + '">' + '<div class="card-header">'
 							+ item.shopName + '</div>'
@@ -72,11 +72,11 @@ $(function() {
 				});
 				$('.list-div').append(html);
 				var total = $('.list-div .card').length;
+
 				if (total >= maxItems) {
-					// 加载完毕，则注销无限加载事件，以防不必要的加载
-					$.detachInfiniteScroll($('.infinite-scroll'));
-					// 删除加载提示符
-					$('.infinite-scroll-preloader').remove();
+					$('.infinite-scroll-preloader').hide();
+				}else{
+					$('.infinite-scroll-preloader').show();
 				}
 				pageNum += 1;
 				loading = false;
@@ -95,7 +95,7 @@ $(function() {
 
 	$('.shop-list').on('click', '.card', function(e) {
 		var shopId = e.currentTarget.dataset.shopId;
-		window.location.href = '/myo2o/frontend/shopdetail?shopId=' + shopId;
+		window.location.href = '/p01/frontend/shopDetail?shopId=' + shopId;
 	});
 
 	$('#shoplist-search-div').on(
@@ -131,7 +131,7 @@ $(function() {
 
 			});
 
-	$('#search').on('input', function(e) {
+	$('#search').on('change', function(e) {
 		shopName = e.target.value;
 		$('.list-div').empty();
 		pageNum = 1;

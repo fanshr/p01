@@ -1,4 +1,4 @@
-package com.imooc.myo2o.enums;
+package com.fanshr.p01.enums;
 
 public enum AwardStateEnum {
 	OFFLINE(-1, "非法奖品"), SUCCESS(0, "操作成功"), INNER_ERROR(-1001, "操作失败"), EMPTY(

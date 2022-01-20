@@ -22,4 +22,5 @@ public class ProductImg {
     private Integer priority;
     private Date createTime;
     private Date lastEditTime;
+    private Long productId;
 }

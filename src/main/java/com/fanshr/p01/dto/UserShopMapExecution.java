@@ -1,9 +1,9 @@
-package com.imooc.myo2o.dto;
+package com.fanshr.p01.dto;
+
+import com.fanshr.p01.entity.UserShopMap;
+import com.fanshr.p01.enums.UserShopMapStateEnum;
 
 import java.util.List;
-
-import com.imooc.myo2o.entity.UserShopMap;
-import com.imooc.myo2o.enums.UserShopMapStateEnum;
 
 public class UserShopMapExecution {
 	// 结果状态

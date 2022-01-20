@@ -1,9 +1,9 @@
-package com.imooc.myo2o.dto;
+package com.fanshr.p01.dto;
+
+import com.fanshr.p01.entity.UserAwardMap;
+import com.fanshr.p01.enums.UserAwardMapStateEnum;
 
 import java.util.List;
-
-import com.imooc.myo2o.entity.UserAwardMap;
-import com.imooc.myo2o.enums.UserAwardMapStateEnum;
 
 public class UserAwardMapExecution {
 	// 结果状态

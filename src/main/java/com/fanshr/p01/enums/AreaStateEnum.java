@@ -1,9 +1,39 @@
-package com.fanshr.p01.enums;/**
- * 
- *
- * @author : LiuYJ	
- * @date : Created at 2021/11/15 16:19  
- * @date : Modified at 2021/11/15 16:19 
- * @version : v1.0       	
-*/public enum AreaStateEnum {
+package com.fanshr.p01.enums;
+
+/**
+ * @author : LiuYJ
+ * @version : v1.0
+ * @date : Created at 2021/11/15 16:19
+ * @date : Modified at 2021/11/15 16:19
+ */
+public enum AreaStateEnum {
+    OFFLINE(-1, "非法区域"),
+    SUCCESS(0, "操作成功"),
+    INNER_ERROR(-1001, "操作失败"),
+    EMPTY(-1002, "区域信息为空");
+
+    private int state;
+    private String stateInfo;
+
+    private AreaStateEnum(int state, String stateInfo) {
+        this.state = state;
+        this.stateInfo = stateInfo;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public String getStateInfo() {
+        return stateInfo;
+    }
+
+    public static AreaStateEnum stateOf(int index) {
+        for (AreaStateEnum state : values()) {
+            if (state.getState() == index) {
+                return state;
+            }
+        }
+        return null;
+    }
 }

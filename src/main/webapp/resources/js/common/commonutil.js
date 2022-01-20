@@ -31,5 +31,5 @@ function getQueryString(name) {
 	return '';
 }
 function changeVerifyCode(img) {
-	img.src = "../Kaptcha?" + Math.floor(Math.random() * 100);
+	img.src = "../kaptcha?" + Math.floor(Math.random() * 100);
 }

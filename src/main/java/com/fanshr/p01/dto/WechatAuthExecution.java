@@ -1,9 +1,9 @@
-package com.imooc.myo2o.dto;
+package com.fanshr.p01.dto;
+
+import com.fanshr.p01.entity.WechatAuth;
+import com.fanshr.p01.enums.WechatAuthStateEnum;
 
 import java.util.List;
-
-import com.imooc.myo2o.entity.WechatAuth;
-import com.imooc.myo2o.enums.WechatAuthStateEnum;
 
 public class WechatAuthExecution {
 	// 结果状态

@@ -1,4 +1,4 @@
-package com.fanshr.p01.web.superadmin;
+package com.fanshr.p01.web.shop;
 
 import com.fanshr.p01.dto.ShopExecution;
 import com.fanshr.p01.entity.Area;

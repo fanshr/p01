@@ -1,18 +1,22 @@
 package com.fanshr.p01.service.impl;
 
+import com.fanshr.p01.dao.ShopCategoryDao;
 import com.fanshr.p01.dao.ShopDao;
 import com.fanshr.p01.dto.ShopExecution;
 import com.fanshr.p01.entity.Shop;
+import com.fanshr.p01.entity.ShopCategory;
 import com.fanshr.p01.enums.ShopStateEnum;
 import com.fanshr.p01.service.ShopService;
 import com.fanshr.p01.util.ImageUtil;
-import com.fanshr.p01.util.PathUtil;
+import com.fanshr.p01.util.PageCalculator;
+import com.fanshr.p01.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author : LiuYJ
@@ -26,7 +30,40 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     private ShopDao shopDao;
+    @Autowired
+    private ShopCategoryDao shopCategoryDao;
 
+
+    @Override
+    public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) {
+        int rowIndex = PageCalculator.calculateRowIndex(pageIndex, pageSize);
+        List<Shop> shopList = shopDao.queryShopList(shopCondition, rowIndex, pageSize);
+        int count = shopDao.queryShopCount(shopCondition);
+
+        ShopExecution se = new ShopExecution();
+        if (shopList != null) {
+            se.setShopList(shopList);
+            se.setCount(count);
+        } else {
+
+            se.setState(ShopStateEnum.INNER_ERROR.getState());
+        }
+
+        return se;
+    }
+
+    @Override
+    public ShopExecution getByEmployeeId(long employeedId) {
+        List<Shop> shopList = shopDao.queryByEmployeeId(employeedId);
+        ShopExecution se = new ShopExecution();
+        se.setShopList(shopList);
+        return se;
+    }
+
+    @Override
+    public Shop getByShopId(long shopId) {
+        return shopDao.queryByShopId(shopId);
+    }
 
     /**
      * 注解控制事务
@@ -51,9 +88,11 @@ public class ShopServiceImpl implements ShopService {
             shop.setCreateTime(new Date());
             shop.setLastEditTime(new Date());
             if (shop.getShopCategory() != null) {
-                // TODO: 获取上级分类标识
                 Long shopCategoryId = shop.getShopCategory().getShopCategoryId();
-
+                ShopCategory sc = shopCategoryDao.queryShopCategoryById(shopCategoryId);
+                ShopCategory parentCategory = new ShopCategory();
+                parentCategory.setShopCategoryId(sc.getParentId());
+                shop.setParentCategory(parentCategory);
 
             }
 
@@ -83,9 +122,40 @@ public class ShopServiceImpl implements ShopService {
 
     }
 
+    @Transactional
+    @Override
+    public ShopExecution modifyShop(Shop shop, CommonsMultipartFile shopImg) {
+
+        if (shop == null || shop.getShopId() == null) {
+            return new ShopExecution(ShopStateEnum.NULL_SHOPID);
+        } else {
+            try {
+                if (shopImg != null) {
+                    Shop tempShop = shopDao.queryByShopId(shop.getShopId());
+                    if (tempShop.getShopImg() != null) {
+                        FileUtil.deleteFile(tempShop.getShopImg());
+                    }
+                    addShopImg(shop, shopImg);
+                }
+
+                shop.setLastEditTime(new Date());
+                int effectedRows = shopDao.updateShop(shop);
+                if (effectedRows < 0) {
+                    return new ShopExecution(ShopStateEnum.INNER_ERROR);
+                } else {
+                    shop = shopDao.queryByShopId(shop.getShopId());
+                    return new ShopExecution(ShopStateEnum.SUCCESS, shop);
+                }
+            } catch (Exception e) {
+
+                throw new RuntimeException("modifyShop error:" + e.getMessage());
+            }
+        }
+    }
+
     private void addShopImg(Shop shop, CommonsMultipartFile shopImg) {
 
-        String dest = PathUtil.getShopImagePath(shop.getShopId());
+        String dest = FileUtil.getShopImagePath(shop.getShopId());
         String shopImgAddr = ImageUtil.generateThumbnail(shopImg, dest);
         shop.setShopImg(shopImgAddr);
     }

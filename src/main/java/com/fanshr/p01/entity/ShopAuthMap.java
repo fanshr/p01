@@ -25,6 +25,6 @@ public class ShopAuthMap {
     private Integer enableStatus;
     private Date createTime;
     private Date lastEditTime;
-    private PersonInfo emplyee;
+    private PersonInfo employee;
     private Shop shop;
 }

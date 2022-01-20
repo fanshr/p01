@@ -1,9 +1,9 @@
-package com.imooc.myo2o.dto;
+package com.fanshr.p01.dto;
+
+import com.fanshr.p01.entity.ProductCategory;
+import com.fanshr.p01.enums.ProductCategoryStateEnum;
 
 import java.util.List;
-
-import com.imooc.myo2o.entity.ProductCategory;
-import com.imooc.myo2o.enums.ProductCategoryStateEnum;
 
 public class ProductCategoryExecution {
 	// 结果状态

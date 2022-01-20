@@ -1,9 +1,10 @@
 $(function() {
-    var url = '/myo2o/frontend/listmainpageinfo';
+    var url = '/p01/frontend/listMainPageInfo';
 
-    $.getJSON(url, function (data) {
-        if (data.success) {
-            var headLineList = data.headLineList;
+    $.getJSON(url, function (response) {
+        console.log("test-->", response);
+        if (response.success) {
+            var headLineList = response.data.headLineList;
             var swiperHtml = '';
             headLineList.map(function (item, index) {
                 swiperHtml += ''
@@ -16,7 +17,7 @@ $(function() {
                 autoplay: 1000,
                 autoplayDisableOnInteraction: false
             });
-            var shopCategoryList = data.shopCategoryList;
+            var shopCategoryList = response.data.shopCategoryList;
             var categoryHtml = '';
             shopCategoryList.map(function (item, index) {
                 categoryHtml += ''
@@ -40,7 +41,7 @@ $(function() {
 
     $('.row').on('click', '.shop-classify', function (e) {
         var shopCategoryId = e.currentTarget.dataset.category;
-        var newUrl = '/myo2o/frontend/shoplist?parentId=' + shopCategoryId;
+        var newUrl = '/p01/frontend/shopList?parentId=' + shopCategoryId;
         window.location.href = newUrl;
     });
 

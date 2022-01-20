@@ -1,9 +1,9 @@
-package com.imooc.myo2o.dto;
+package com.fanshr.p01.dto;
+
+import com.fanshr.p01.entity.Award;
+import com.fanshr.p01.enums.AwardStateEnum;
 
 import java.util.List;
-
-import com.imooc.myo2o.entity.Award;
-import com.imooc.myo2o.enums.AwardStateEnum;
 
 public class AwardExecution {
 	// 结果状态
